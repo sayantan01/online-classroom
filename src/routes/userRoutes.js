@@ -1,0 +1,62 @@
+const express = require("express");
+const route = express.Router();
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const userSchema = require("../models/userModel");
+const classroomSchema = require("../models/classModel");
+
+require("dotenv").config();
+
+route.post("/signup", async (req, res) => {
+  try {
+    const { name, email, password, usertype } = req.body;
+    const user = await userSchema.findOne({ email });
+    if (user) {
+      res.status(400).json({ msg: "Email already exists" });
+      return;
+    }
+
+    hashed_password = await bcrypt.hash(password, 8);
+    isTeacher = usertype === "teacher" ? true : false;
+    let newUser = new userSchema({
+      name,
+      email,
+      password: hashed_password,
+      isTeacher,
+    });
+    const retuser = await newUser.save();
+    res.json(retuser);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+});
+
+route.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await userSchema.findOne({ email });
+    if (!user) {
+      res.status(403).json({ msg: "User does not exist" });
+      return;
+    }
+
+    const ismatch = await bcrypt.compare(password, user.password);
+    if (!ismatch) {
+      res.status(403).json({ msg: "Incorrect password" });
+      return;
+    }
+
+    const token = await jwt.sign({ email }, process.env.SECRET, {
+      expiresIn: "1h",
+    });
+    populated_user = await user.populate("classrooms");
+    res.json({ token, email, classrooms: populated_user.classrooms });
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+});
+
+module.exports = route;

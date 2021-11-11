@@ -1,13 +1,19 @@
 const express = require("express");
+const cors = require("cors");
 const path = require("path");
+const bearerToken = require("express-bearer-token");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const userRoutes = require("./routes/userRoutes");
+const classRoutes = require("./routes/classRoutes");
 
 const app = express();
 dotenv.config();
 
 app.use(bodyParser.json());
+app.use(cors());
+app.use(bearerToken());
 
 const uri = process.env.MONGODB_URI;
 mongoose
@@ -30,6 +36,9 @@ if (process.env.NODE_ENV === "production") {
     res.json({ test: "success" });
   });
 }
+
+app.use("/api/user", userRoutes);
+app.use("/api/classroom", classRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Server up on http://localhost:${PORT}`));
