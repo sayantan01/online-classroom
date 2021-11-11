@@ -32,9 +32,6 @@ function CreateClassroom() {
           Classroom name:
           <br />
           <input type="text" placeholder="Enter classroom name" required />
-          <br />
-          Passcode: <br />
-          <input type="password" placeholder="Create a passcode" required />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

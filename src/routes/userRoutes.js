@@ -11,6 +11,10 @@ require("dotenv").config();
 route.post("/signup", async (req, res) => {
   try {
     const { name, email, password, usertype } = req.body;
+    if (usertype !== "teacher" && usertype !== "student") {
+      res.status(400).json({ msg: "Invalid user type" });
+      return;
+    }
     const user = await userSchema.findOne({ email });
     if (user) {
       res.status(400).json({ msg: "Email already exists" });
@@ -26,7 +30,7 @@ route.post("/signup", async (req, res) => {
       isTeacher,
     });
     const retuser = await newUser.save();
-    res.json(retuser);
+    res.json({ user: retuser });
   } catch (err) {
     console.log(err);
     res.sendStatus(500);
