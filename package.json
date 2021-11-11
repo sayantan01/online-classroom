@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node src/index",
     "dev": "nodemon src/index",
+    "cdev": "concurrently --kill-others-on-fail \"npm start\" \"cd client && npm start\"",
     "style_server": "npx prettier --write .",
     "style_client": "npx prettier --write client/src/",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -26,6 +27,7 @@
   },
   "homepage": "https://github.com/sayantan01/online-classroom#readme",
   "devDependencies": {
+    "concurrently": "^6.3.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.4.1"
   },

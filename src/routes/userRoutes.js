@@ -56,7 +56,12 @@ route.post("/login", async (req, res) => {
       expiresIn: "1h",
     });
     populated_user = await user.populate("classrooms");
-    res.json({ token, email, classrooms: populated_user.classrooms });
+    res.json({
+      token,
+      email,
+      isTeacher: populated_user.isTeacher,
+      classrooms: populated_user.classrooms,
+    });
   } catch (err) {
     console.log(err);
     res.sendStatus(500);

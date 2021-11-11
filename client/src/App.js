@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Nav, Navbar } from "react-bootstrap";
+import { connect } from "react-redux";
 import Home from "./components/Home";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
@@ -22,10 +23,12 @@ function App(props) {
               <Nav.Link href="/signup">Signup</Nav.Link>
               <Nav.Link href="/login">Login</Nav.Link>
               <Nav.Link href="/dashboard">Dashboard</Nav.Link>
-              <Nav.Item>
-                <User />
-              </Nav.Item>
-              <Logout />
+              {props.token !== null && (
+                <Nav.Item>
+                  <User />
+                </Nav.Item>
+              )}
+              {props.token !== null && <Logout />}
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -43,4 +46,11 @@ function App(props) {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+    courses: state.courses,
+  };
+};
+
+export default connect(mapStateToProps)(App);

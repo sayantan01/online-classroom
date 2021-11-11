@@ -24,6 +24,7 @@ const authHandler = async (req, res, next) => {
   }
 };
 
+// create a classroom
 route.post("/create", authHandler, async (req, res) => {
   try {
     if (!req.user) return;
@@ -31,6 +32,7 @@ route.post("/create", authHandler, async (req, res) => {
       res.status(403).json({ msg: "Only teachers can create classrooms" });
       return;
     }
+
     const { name } = req.body;
     let classroom = await classroomSchema.findOne({ name });
     if (classroom) {
@@ -49,12 +51,15 @@ route.post("/create", authHandler, async (req, res) => {
     const newClassroom = new classroomSchema({
       name,
       creator: req.user.name,
+      //TODO: write a function to generate unique passcode
       passcode: "abcd",
     });
+
     const retClassroom = await newClassroom.save();
     req.user.classrooms.push(retClassroom._id);
     let newuser = await req.user.save();
     populated_newuser = await newuser.populate("classrooms");
+
     res.json({
       msg: "Successfully created classroom",
       classrooms: populated_newuser.classrooms,

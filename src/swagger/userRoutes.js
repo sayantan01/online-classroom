@@ -56,6 +56,9 @@
  *         email:
  *           type: string
  *           example: abc@gmail.com
+ *         isTeacher:
+ *           type: bool
+ *           example: true
  *         classrooms:
  *            type: array
  *            example: []

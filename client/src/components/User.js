@@ -1,14 +1,20 @@
 import React from "react";
+import { connect } from "react-redux";
 
 function User(props) {
-  const email = "demo@gmail.com";
   return (
     <div>
       <p style={{ color: "white" }} className="mx-md-5 my-2">
-        Hello {email.split("@")[0]}
+        Hello {props.email.split("@")[0]}
       </p>
     </div>
   );
 }
 
-export default User;
+const mapStateToProps = (state) => {
+  return {
+    email: state.email,
+  };
+};
+
+export default connect(mapStateToProps)(User);
