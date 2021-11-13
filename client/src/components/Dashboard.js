@@ -92,7 +92,7 @@ function CreateOrJoinClassroom({ props }) {
             Close
           </Button>
           <Button variant="primary" onClick={handleCreateOrJoin}>
-            Create
+            {props.isTeacher ? "Create" : "Join"}
           </Button>
         </Modal.Footer>
       </Modal>

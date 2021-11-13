@@ -3,6 +3,8 @@ import axios from "axios";
 import { Redirect, withRouter } from "react-router";
 import { connect } from "react-redux";
 import { Alert } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 function Signup(props) {
   const [values, setValues] = useState({
@@ -13,6 +15,8 @@ function Signup(props) {
   });
   const [successful, setSuccessful] = useState(false);
   const [signuperror, setSignuperror] = useState("");
+  const [passwdshow, setPasswdshow] = useState(0);
+  let passwdicon = passwdshow === 1 ? faEye : faEyeSlash;
 
   const onChangeName = (e) => {
     e.persist();
@@ -83,7 +87,7 @@ function Signup(props) {
       )}
       <form onSubmit={onSubmit}>
         <div className="d-grid gap-2 col-6 mx-auto text-center my-4">
-          <h2 className="form-title">Sign Up</h2>
+          <h2 className="form-title">Create Account</h2>
         </div>
         <div className="d-grid gap-2 col-6 mx-auto my-3">
           <label>
@@ -115,14 +119,18 @@ function Signup(props) {
           <label>
             Password<sup style={{ color: "red" }}>*</sup>
           </label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Password"
-            value={values.password}
-            onChange={onChangePassword}
-            required
-          />
+          <div className="input-group">
+            <button onClick={() => setPasswdshow(1 - passwdshow)}>
+              <FontAwesomeIcon icon={passwdicon} />
+            </button>
+            <input
+              type={passwdshow === 0 ? "password" : "text"}
+              className="form-control"
+              placeholder="Password"
+              value={values.password}
+              onChange={onChangePassword}
+            />
+          </div>
         </div>
         <div className="d-grid gap-2 col-6 mx-auto my-3">
           <label>
@@ -152,9 +160,29 @@ function Signup(props) {
           </div>
         </div>
         <div className="d-grid gap-2 col-6 mx-auto">
-          <input type="submit" className="btn btn-success" value="Signup" />
+          <input
+            type="submit"
+            className="btn btn-success"
+            value="Signup"
+            disabled={
+              values.email.length === 0 ||
+              values.name.length === 0 ||
+              values.password.length === 0 ||
+              values.usertype.length === 0
+                ? true
+                : false
+            }
+          />
         </div>
       </form>
+      <div className="d-grid gap-2 col-6 mx-auto my-4 text-center">
+        <p>
+          Already have an account?{" "}
+          <a href="/login" class="link-primary">
+            Login here
+          </a>
+        </p>
+      </div>
     </div>
   );
 }

@@ -3,6 +3,8 @@ import { Redirect } from "react-router";
 import { connect } from "react-redux";
 import { Alert } from "react-bootstrap";
 import { login } from "../actions/creators";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 function Login(props) {
   const [values, setValues] = useState({
@@ -11,6 +13,8 @@ function Login(props) {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [passwdshow, setPasswdshow] = useState(0);
+  let passwdicon = passwdshow === 1 ? faEye : faEyeSlash;
 
   const onChangeEmail = (e) => {
     e.persist();
@@ -71,19 +75,41 @@ function Login(props) {
           <label>
             Password<sup style={{ color: "red" }}>*</sup>
           </label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Password"
-            value={values.password}
-            onChange={onChangePassword}
-            required
-          />
+          <div className="input-group">
+            <button onClick={() => setPasswdshow(1 - passwdshow)}>
+              <FontAwesomeIcon icon={passwdicon} />
+            </button>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Password"
+              value={values.password}
+              onChange={onChangePassword}
+              required
+            />
+          </div>
         </div>
         <div className="d-grid gap-2 col-6 mx-auto my-3">
-          <input type="submit" className="btn btn-success" value="Login" />
+          <input
+            type="submit"
+            className="btn btn-success"
+            value="Login"
+            disabled={
+              values.email.length === 0 || values.password.length === 0
+                ? true
+                : false
+            }
+          />
         </div>
       </form>
+      <div className="d-grid gap-2 col-6 mx-auto my-4 text-center">
+        <p>
+          Don't have an account?{" "}
+          <a href="/login" class="link-primary">
+            Create an account here
+          </a>
+        </p>
+      </div>
     </div>
   );
 }
