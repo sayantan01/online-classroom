@@ -82,7 +82,9 @@ function Signup(props) {
           onClose={() => setSuccessful(false)}
           dismissible
         >
-          Successfully registered. Go to Login page
+          <p>
+            Successfully registered. You can Now <a href="/login">Login here</a>
+          </p>
         </Alert>
       )}
       <form onSubmit={onSubmit}>
@@ -120,9 +122,12 @@ function Signup(props) {
             Password<sup style={{ color: "red" }}>*</sup>
           </label>
           <div className="input-group">
-            <button onClick={() => setPasswdshow(1 - passwdshow)}>
-              <FontAwesomeIcon icon={passwdicon} />
-            </button>
+            <span className="input-group-text">
+              <FontAwesomeIcon
+                icon={passwdicon}
+                onClick={(e) => setPasswdshow(1 - passwdshow)}
+              />
+            </span>
             <input
               type={passwdshow === 0 ? "password" : "text"}
               className="form-control"
@@ -178,7 +183,7 @@ function Signup(props) {
       <div className="d-grid gap-2 col-6 mx-auto my-4 text-center">
         <p>
           Already have an account?{" "}
-          <a href="/login" class="link-primary">
+          <a href="/login" className="link-primary">
             Login here
           </a>
         </p>

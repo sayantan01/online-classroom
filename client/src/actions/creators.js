@@ -22,6 +22,7 @@ export const login = (user) => {
 export const createOrJoinClass = (credentials) => {
   return async (dispatch) => {
     try {
+      dispatch(resetError());
       let reqObj = {};
       if (credentials.isTeacher) reqObj.name = credentials.name;
       else reqObj.passcode = credentials.passcode;

@@ -76,11 +76,14 @@ function Login(props) {
             Password<sup style={{ color: "red" }}>*</sup>
           </label>
           <div className="input-group">
-            <button onClick={() => setPasswdshow(1 - passwdshow)}>
-              <FontAwesomeIcon icon={passwdicon} />
-            </button>
+            <span className="input-group-text">
+              <FontAwesomeIcon
+                icon={passwdicon}
+                onClick={(e) => setPasswdshow(1 - passwdshow)}
+              />
+            </span>
             <input
-              type="password"
+              type={passwdshow === 0 ? "password" : "text"}
               className="form-control"
               placeholder="Password"
               value={values.password}
@@ -105,7 +108,7 @@ function Login(props) {
       <div className="d-grid gap-2 col-6 mx-auto my-4 text-center">
         <p>
           Don't have an account?{" "}
-          <a href="/login" class="link-primary">
+          <a href="/signup" className="link-primary">
             Create an account here
           </a>
         </p>

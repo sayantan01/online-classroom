@@ -9,6 +9,7 @@ function CreateOrJoinClassroom({ props }) {
   const [show, setShow] = useState(false);
   const [inputval, setInputval] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [classlength, setClasslength] = useState(0);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -27,6 +28,7 @@ function CreateOrJoinClassroom({ props }) {
     if (props.isTeacher) reqObj.name = inputval;
     else reqObj.passcode = inputval;
     setSubmitted(true);
+    setClasslength(props.classrooms.length);
     props.dispatch(createOrJoinClass(reqObj));
   };
 
@@ -41,7 +43,7 @@ function CreateOrJoinClassroom({ props }) {
           {props.errors}
         </Alert>
       )}
-      {submitted && !props.errors && (
+      {submitted && !props.errors && props.classrooms.length > classlength && (
         <Alert
           variant="success"
           onClose={() => setSubmitted(false)}

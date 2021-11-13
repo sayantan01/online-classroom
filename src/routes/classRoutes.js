@@ -82,15 +82,15 @@ route.post("/join", authHandler, async (req, res) => {
 
     const { passcode } = req.body;
     let classroom = await classroomSchema.findOne({ passcode });
-    if (classroom) {
-      const classroomExists = await req.user.classrooms.find((classroom_id) =>
-        isEqual(classroom_id, classroom._id)
-      );
+    if (!classroom) return res.status(400).json({ msg: "Invalid Passcode" });
 
-      if (classroomExists) {
-        res.status(400).json({ msg: "Classroom already joined" });
-        return;
-      }
+    const classroomExists = await req.user.classrooms.find((classroom_id) =>
+      isEqual(classroom_id, classroom._id)
+    );
+
+    if (classroomExists) {
+      res.status(400).json({ msg: "Classroom already joined" });
+      return;
     }
 
     req.user.classrooms.push(classroom._id);
