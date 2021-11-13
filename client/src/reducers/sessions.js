@@ -3,6 +3,7 @@ import {
   LOGOUT_USER,
   CREATE_CLASSROOM,
   RECEIVE_ERROR,
+  RESET_ERROR,
 } from "../actions/actionUtils";
 
 const initialState = {
@@ -42,6 +43,12 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         msg: action.msg,
+      };
+
+    case RESET_ERROR:
+      return {
+        ...state,
+        msg: "",
       };
 
     default:

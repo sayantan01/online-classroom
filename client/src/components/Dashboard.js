@@ -3,29 +3,31 @@ import { Button, Modal, Row, Col, Card, Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Alert } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
-import { createClass } from "../actions/creators";
+import { createOrJoinClass } from "../actions/creators";
 
-function CreateClassroom({ props }) {
+function CreateOrJoinClassroom({ props }) {
   const [show, setShow] = useState(false);
-  const [classname, setClassname] = useState("");
+  const [inputval, setInputval] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const onchangeName = (e) => {
+  const onchangeInputval = (e) => {
     e.persist();
-    setClassname(e.target.value);
+    setInputval(e.target.value);
   };
 
-  const handleCreate = () => {
+  const handleCreateOrJoin = () => {
     setShow(false);
-    const reqObj = {
-      name: classname,
+    let reqObj = {
       token: props.token,
+      isTeacher: props.isTeacher,
     };
+    if (props.isTeacher) reqObj.name = inputval;
+    else reqObj.passcode = inputval;
     setSubmitted(true);
-    props.dispatch(createClass(reqObj));
+    props.dispatch(createOrJoinClass(reqObj));
   };
 
   return (
@@ -45,7 +47,9 @@ function CreateClassroom({ props }) {
           onClose={() => setSubmitted(false)}
           dismissible
         >
-          {"Successfully created classroom"}
+          {props.isTeacher
+            ? "Successfully created classroom"
+            : "Successfully joined classroom"}
         </Alert>
       )}
       <Row className="my-3">
@@ -54,26 +58,32 @@ function CreateClassroom({ props }) {
         </Col>
         <Col md={4}>
           <Button variant="primary" onClick={handleShow}>
-            + Create Classroom
+            {props.isTeacher ? "+ Create Classroom" : "+ Join Classroom"}
           </Button>
         </Col>
       </Row>
       <p style={{ color: "red" }}>
-        * To let the students join a classroom, share the classroom's passcode
-        with them
+        {props.isTeacher
+          ? "* To let the students join a classroom, share the classroom's passcode with them"
+          : "* To join a classroom, click on the button and enter the passcode shared by your teacher"}
       </p>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Create new classroom</Modal.Title>
+          <Modal.Title>
+            {props.isTeacher ? "Create new classroom" : "Join a classroom"}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Classroom name:
+          {props.isTeacher ? "Classroom name:" : "Passcode"}
           <br />
           <input
+            style={{ marginTop: 10 }}
             type="text"
-            placeholder="Enter classroom name"
-            value={classname}
-            onChange={onchangeName}
+            placeholder={
+              props.isTeacher ? "Enter classroom name" : "Enter passcode"
+            }
+            value={inputval}
+            onChange={onchangeInputval}
             required
           />
         </Modal.Body>
@@ -81,7 +91,7 @@ function CreateClassroom({ props }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleCreate}>
+          <Button variant="primary" onClick={handleCreateOrJoin}>
             Create
           </Button>
         </Modal.Footer>
@@ -112,7 +122,9 @@ function ClassIcon(props) {
               <label>Created by: {props.teacher_name}</label>
             )}
             <br />
-            <label>Passcode: {props.passcode}</label>
+            {props.isTeacher === true && (
+              <label>Passcode: {props.passcode}</label>
+            )}
           </Card.Text>
         </Card.Body>
       </Card>
@@ -123,22 +135,26 @@ function ClassIcon(props) {
 function Dashboard(props) {
   const renderClassroom = () => {
     if (props.classrooms === undefined || props.classrooms === null) return;
-    return props.classrooms.map((item, i) => {
-      return (
-        <ClassIcon
-          key={i}
-          classroom_name={item.name}
-          teacher_name={item.creator}
-          passcode={item.passcode}
-        />
-      );
-    });
+    return props.classrooms
+      .slice(0)
+      .reverse()
+      .map((item, i) => {
+        return (
+          <ClassIcon
+            key={i}
+            classroom_name={item.name}
+            teacher_name={item.creator}
+            passcode={item.passcode}
+            isTeacher={props.isTeacher}
+          />
+        );
+      });
   };
 
   return (
     <Container>
       {props.token === null && <Redirect to="/Login" />}
-      {props.isTeacher && <CreateClassroom props={props} />}
+      <CreateOrJoinClassroom props={props} />
       {props.classrooms && props.classrooms.length === 0 && (
         <div className="text-center my-5">
           <h5 style={{ color: "gray" }}>You don't have any classrooms yet</h5>

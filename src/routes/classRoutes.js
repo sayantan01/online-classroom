@@ -3,6 +3,7 @@ const route = express.Router();
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const { isEqual } = require("lodash");
+const { base64encode } = require("nodejs-base64");
 const userSchema = require("../models/userModel");
 const classroomSchema = require("../models/classModel");
 
@@ -48,11 +49,11 @@ route.post("/create", authHandler, async (req, res) => {
       }
     }
 
+    const unique_passcode = base64encode(req.user.email + "@" + name);
     const newClassroom = new classroomSchema({
       name,
       creator: req.user.name,
-      //TODO: write a function to generate unique passcode
-      passcode: "abcd",
+      passcode: unique_passcode,
     });
 
     const retClassroom = await newClassroom.save();
@@ -62,6 +63,42 @@ route.post("/create", authHandler, async (req, res) => {
 
     res.json({
       msg: "Successfully created classroom",
+      classrooms: populated_newuser.classrooms,
+    });
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+});
+
+// join a classroom
+route.post("/join", authHandler, async (req, res) => {
+  try {
+    if (!req.user) return;
+    if (req.user.isTeacher === true) {
+      res.status(403).json({ msg: "Only students can join classrooms" });
+      return;
+    }
+
+    const { passcode } = req.body;
+    let classroom = await classroomSchema.findOne({ passcode });
+    if (classroom) {
+      const classroomExists = await req.user.classrooms.find((classroom_id) =>
+        isEqual(classroom_id, classroom._id)
+      );
+
+      if (classroomExists) {
+        res.status(400).json({ msg: "Classroom already joined" });
+        return;
+      }
+    }
+
+    req.user.classrooms.push(classroom._id);
+    let newuser = await req.user.save();
+    populated_newuser = await newuser.populate("classrooms");
+
+    res.json({
+      msg: "Successfully joined classroom",
       classrooms: populated_newuser.classrooms,
     });
   } catch (err) {
