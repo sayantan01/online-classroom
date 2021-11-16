@@ -47,27 +47,27 @@ function renderAssignments(props) {
   if (props.classrooms === null) return;
   return props.classrooms.map((c, id) => {
     return c.assignments.map((assign, aid) => {
-    const path = "/classrooms/" + id + "/" + aid;
-    console.log(assign);
-    console.log(path);
-    return (
-      <Route
-        key={aid}
-        exact
-        path={path}
-        render={(props) => (
-          <Assignment
-            {...props}
-            id={aid}
-            title={assign.title}
-            statement={assign.statement}
-            createdAt={assign.createdAt}
-            deadline={assign.deadline}
-            attachments={assign.attachments}
-          />
-        )}
-      />
-    );
+      const path = "/classrooms/" + id + "/" + aid;
+      console.log(assign);
+      console.log(path);
+      return (
+        <Route
+          key={aid}
+          exact
+          path={path}
+          render={(props) => (
+            <Assignment
+              {...props}
+              id={aid}
+              title={assign.title}
+              statement={assign.statement}
+              createdAt={assign.createdAt}
+              deadline={assign.deadline}
+              attachments={assign.attachments}
+            />
+          )}
+        />
+      );
     });
   });
 }
@@ -84,7 +84,7 @@ function App(props) {
       console.log("err " + err);
     }
   }, [props]);
-    console.log(process.env.PUBLIC_URL)
+  console.log(process.env.PUBLIC_URL);
 
   return (
     <div>

@@ -3,7 +3,7 @@ import { Button, Modal, Row, Col, Card, Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Alert } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 import { createOrJoinClass } from "../actions/creators";
 
 function CreateOrJoinClassroom({ props }) {
@@ -156,8 +156,8 @@ function Dashboard(props) {
       .map((item, i) => {
         return (
           <ClassIcon
-            key={i}
-            id={i}
+            key={props.classrooms.length - 1 - i}
+            id={props.classrooms.length - 1 - i}
             classroom_name={item.name}
             teacher_name={item.creator}
             passcode={item.passcode}
@@ -171,7 +171,7 @@ function Dashboard(props) {
     <Container>
       {props.token === null && <Redirect to="/Login" />}
       <Helmet>
-          <style>{'body { background-color: whitesmoke; }'}</style>
+        <style>{"body { background-color: whitesmoke; }"}</style>
       </Helmet>
       <CreateOrJoinClassroom props={props} />
       {props.classrooms && props.classrooms.length === 0 && (

@@ -5,7 +5,7 @@ import { Alert } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
-import {Helmet} from 'react-helmet';
+import { Helmet } from "react-helmet";
 import enIN from "date-fns/locale/en-IN";
 import "react-datepicker/dist/react-datepicker.css";
 import { createAssignment } from "../actions/creators";
@@ -241,9 +241,9 @@ function Classroom(props) {
       .map((item, i) => {
         return (
           <AssignmentIcon
-            key={i}
+            key={props.assignments.length - 1 - i}
             cid={props.id}
-            aid={i}
+            aid={props.assignments.length - 1 - i}
             title={item.title}
             deadline={item.deadline}
             createdAt={item.createdAt}
@@ -257,7 +257,7 @@ function Classroom(props) {
     <Container>
       {props.token === null && <Redirect to="/Login" />}
       <Helmet>
-          <style>{'body { background-color: whitesmoke; }'}</style>
+        <style>{"body { background-color: whitesmoke; }"}</style>
       </Helmet>
       <CreateAssignment props={props} />
       {props.assignments && props.assignments.length === 0 && (

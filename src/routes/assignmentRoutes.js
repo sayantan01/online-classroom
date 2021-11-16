@@ -88,17 +88,16 @@ route.post(
   }
 );
 
-route.get('/download/:filename', (req, res)=>{
+route.get("/download/:filename", (req, res) => {
   try {
-    console.log(req.params)
-  const filename = __dirname + "../../../uploads/" + req.params.filename
-  res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-  res.download(filename)
-}
-  catch(err) {
+    console.log(req.params);
+    const filename = __dirname + "../../../uploads/" + req.params.filename;
+    res.setHeader("Content-disposition", "attachment; filename=" + filename);
+    res.download(filename);
+  } catch (err) {
     console.log(err);
-    res.json({msg: "error occurred"})
+    res.json({ msg: "error occurred" });
   }
-})
+});
 
 module.exports = route;

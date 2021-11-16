@@ -62,7 +62,6 @@ export const createAssignment = (details) => {
       return dispatch(updateClassroom(response.data.classrooms));
     } catch (err) {
       return dispatch(receiveError(err.response.data.msg));
-      
     }
   };
 };
