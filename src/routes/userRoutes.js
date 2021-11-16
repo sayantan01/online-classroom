@@ -3,11 +3,12 @@ const route = express.Router();
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const userSchema = require("../models/userModel");
-const classroomSchema = require("../models/classModel");
+const userSchema = require("../models/userModels");
+const { classroomSchema } = require("../models/classModels");
 
 require("dotenv").config();
 
+// create an user account
 route.post("/signup", async (req, res) => {
   try {
     const { name, email, password, usertype } = req.body;
@@ -37,6 +38,7 @@ route.post("/signup", async (req, res) => {
   }
 });
 
+// login by a user if already registered
 route.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;

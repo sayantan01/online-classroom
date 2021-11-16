@@ -3,6 +3,7 @@ import { Button, Modal, Row, Col, Card, Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Alert } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
+import { Helmet } from 'react-helmet';
 import { createOrJoinClass } from "../actions/creators";
 
 function CreateOrJoinClassroom({ props }) {
@@ -56,7 +57,7 @@ function CreateOrJoinClassroom({ props }) {
       )}
       <Row className="my-3">
         <Col md={8}>
-          <h1>Welcome to dashboard</h1>
+          <h1>Your Classrooms</h1>
         </Col>
         <Col md={4}>
           <Button variant="primary" onClick={handleShow}>
@@ -117,7 +118,19 @@ function ClassIcon(props) {
         />
         <Card.Body>
           <Card.Title style={{ color: "white", fontWeight: "bold" }}>
-            {props.classroom_name}
+            <Row>
+              <Col xs={8}>{props.classroom_name}</Col>
+              <Col xs={4}>
+                <Button variant="danger">
+                  <a
+                    href={`/classrooms/${props.id}`}
+                    style={{ color: "white" }}
+                  >
+                    Enter
+                  </a>
+                </Button>
+              </Col>
+            </Row>
           </Card.Title>
           <Card.Text style={{ color: "orange", fontWeight: "bold" }}>
             {props.isTeacher === false && (
@@ -144,6 +157,7 @@ function Dashboard(props) {
         return (
           <ClassIcon
             key={i}
+            id={i}
             classroom_name={item.name}
             teacher_name={item.creator}
             passcode={item.passcode}
@@ -156,6 +170,9 @@ function Dashboard(props) {
   return (
     <Container>
       {props.token === null && <Redirect to="/Login" />}
+      <Helmet>
+          <style>{'body { background-color: whitesmoke; }'}</style>
+      </Helmet>
       <CreateOrJoinClassroom props={props} />
       {props.classrooms && props.classrooms.length === 0 && (
         <div className="text-center my-5">

@@ -1,6 +1,6 @@
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
-export const CREATE_CLASSROOM = "CREATE_CLASSROOM";
+export const UPDATE_CLASSROOM = "UPDATE_CLASSROOM";
 export const RECEIVE_ERROR = "RECEIVE_ERROR";
 export const RESET_ERROR = "RESET_ERROR";
 
@@ -14,9 +14,9 @@ export const loginUser = (token, email, isTeacher, classrooms) => {
   };
 };
 
-export const createClassroom = (classrooms) => {
+export const updateClassroom = (classrooms) => {
   return {
-    type: CREATE_CLASSROOM,
+    type: UPDATE_CLASSROOM,
     classrooms,
   };
 };

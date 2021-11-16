@@ -1,7 +1,7 @@
 import axios from "axios";
 import {
   loginUser,
-  createClassroom,
+  updateClassroom,
   receiveError,
   resetError,
 } from "./actionUtils";
@@ -34,9 +34,35 @@ export const createOrJoinClass = (credentials) => {
           Authorization: "Bearer " + credentials.token,
         },
       });
-      return dispatch(createClassroom(response.data.classrooms));
+      return dispatch(updateClassroom(response.data.classrooms));
     } catch (err) {
       return dispatch(receiveError(err.response.data.msg));
+    }
+  };
+};
+
+export const createAssignment = (details) => {
+  return async (dispatch) => {
+    try {
+      dispatch(resetError());
+      let url = "/api/assignment/create";
+      const formData = new FormData();
+      formData.append("title", details.title);
+      formData.append("statement", details.statement);
+      formData.append("deadline", details.deadline);
+      formData.append("classroom_id", details.classroom_id);
+      formData.append("attachment", details.attachment);
+
+      const response = await axios.post(url, formData, {
+        headers: {
+          Authorization: "Bearer " + details.token,
+          ContentType: "multipart/form-data",
+        },
+      });
+      return dispatch(updateClassroom(response.data.classrooms));
+    } catch (err) {
+      return dispatch(receiveError(err.response.data.msg));
+      
     }
   };
 };

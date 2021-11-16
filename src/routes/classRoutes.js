@@ -4,11 +4,12 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const { isEqual } = require("lodash");
 const { base64encode } = require("nodejs-base64");
-const userSchema = require("../models/userModel");
-const classroomSchema = require("../models/classModel");
+const userSchema = require("../models/userModels");
+const { classroomSchema } = require("../models/classModels");
 
 require("dotenv").config();
 
+// middleware to verify the jwt token extracted from bearer header
 const authHandler = async (req, res, next) => {
   try {
     const decoded = await jwt.verify(req.token, process.env.SECRET);
@@ -25,7 +26,7 @@ const authHandler = async (req, res, next) => {
   }
 };
 
-// create a classroom
+// create a classroom - used by teachers
 route.post("/create", authHandler, async (req, res) => {
   try {
     if (!req.user) return;
@@ -52,7 +53,7 @@ route.post("/create", authHandler, async (req, res) => {
     const unique_passcode = base64encode(req.user.email + "@" + name);
     const newClassroom = new classroomSchema({
       name,
-      creator: req.user.name,
+      creator: req.user.email,
       passcode: unique_passcode,
     });
 
@@ -71,7 +72,7 @@ route.post("/create", authHandler, async (req, res) => {
   }
 });
 
-// join a classroom
+// join a classroom - used by students
 route.post("/join", authHandler, async (req, res) => {
   try {
     if (!req.user) return;

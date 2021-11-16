@@ -1,7 +1,7 @@
 import {
   LOGIN_USER,
   LOGOUT_USER,
-  CREATE_CLASSROOM,
+  UPDATE_CLASSROOM,
   RECEIVE_ERROR,
   RESET_ERROR,
 } from "../actions/actionUtils";
@@ -28,7 +28,7 @@ function reducer(state = initialState, action) {
       };
       return obj;
 
-    case CREATE_CLASSROOM:
+    case UPDATE_CLASSROOM:
       const pobj = {
         ...state,
         classrooms: action.classrooms,
