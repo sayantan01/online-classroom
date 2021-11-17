@@ -111,12 +111,8 @@ function ClassIcon(props) {
         border="primary"
         style={{ width: 350, height: 350, margin: 20 }}
       >
-        <Card.Img
-          variant="top"
-          src="./classroom.png"
-          alt="Icon"
-        />
-        <Card.Body>
+        <Card.Img variant="top" src="./classroom.png" alt="Icon" />
+        <Card.Body className="text-wrap">
           <Card.Title style={{ color: "white", fontWeight: "bold" }}>
             <Row>
               <Col xs={8}>{props.classroom_name}</Col>
@@ -138,7 +134,9 @@ function ClassIcon(props) {
             )}
             <br />
             {props.isTeacher === true && (
-              <label>Passcode: {props.passcode}</label>
+              <label>
+                Passcode: <p style={{ fontSize: 12 }}>{props.passcode}</p>
+              </label>
             )}
           </Card.Text>
         </Card.Body>

@@ -82,7 +82,6 @@ function App(props) {
       console.log("err " + err);
     }
   }, [props]);
-  console.log(process.env.PUBLIC_URL);
 
   return (
     <div>

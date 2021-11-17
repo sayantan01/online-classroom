@@ -173,11 +173,7 @@ function AssignmentIcon(props) {
         border="primary"
         style={{ width: 350, height: 350, margin: 20 }}
       >
-        <Card.Img
-          variant="top"
-          src="../assignment.jpg"
-          alt="Icon"
-        />
+        <Card.Img variant="top" src="../assignment.jpg" alt="Icon" />
         <Card.Body>
           <Card.Title style={{ color: "white", fontWeight: "bold" }}>
             <Row>

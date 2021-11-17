@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Disqus from "disqus-react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Container, Row, Col, Button, Alert } from "react-bootstrap";
@@ -40,7 +41,7 @@ function Submissions({ props }) {
       );
     });
   };
-  
+
   return (
     <div>
       <div>
@@ -61,7 +62,13 @@ function Submissions({ props }) {
 }
 
 function Assignment(props) {
-  console.log(props.title, props.deadline);
+  const disqusShortname = "https-online-classroom-2021-herokuapp-com";
+  const disqusConfig = {
+    url: "https://online-classroom-2021.herokuapp.com/",
+    identifier: "assignment-id",
+    title: "assignment",
+  };
+
   const exists = props.records.find((r) => r.student === props.email);
 
   const [answer, setAnswer] = useState("");
@@ -147,6 +154,13 @@ function Assignment(props) {
       )}
 
       {props.isTeacher === true && <Submissions props={props} />}
+
+      <div className="my-5">
+        <Disqus.DiscussionEmbed
+          shortname={disqusShortname}
+          config={disqusConfig}
+        />
+      </div>
     </Container>
   );
 }
