@@ -113,7 +113,7 @@ function ClassIcon(props) {
       >
         <Card.Img
           variant="top"
-          src="https://www.chieflearningofficer.com/wp-content/uploads/sites/3/beans/images/AdobeStock_342462377-8b38574.png"
+          src="./classroom.png"
           alt="Icon"
         />
         <Card.Body>

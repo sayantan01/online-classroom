@@ -21,7 +21,6 @@ function renderClassrooms(props) {
   if (props.classrooms === null) return;
   return props.classrooms.map((c, id) => {
     const path = "/classrooms/" + id;
-    console.log(path, c.assignments);
     return (
       <Route
         key={id}
@@ -48,8 +47,6 @@ function renderAssignments(props) {
   return props.classrooms.map((c, id) => {
     return c.assignments.map((assign, aid) => {
       const path = "/classrooms/" + id + "/" + aid;
-      console.log(assign);
-      console.log(path);
       return (
         <Route
           key={aid}
@@ -59,11 +56,12 @@ function renderAssignments(props) {
             <Assignment
               {...props}
               id={aid}
+              assignment_id={assign._id}
               title={assign.title}
               statement={assign.statement}
               createdAt={assign.createdAt}
-              deadline={assign.deadline}
-              attachments={assign.attachments}
+              deadline={assign.deadline.slice(0, 10)}
+              records={assign.records}
             />
           )}
         />

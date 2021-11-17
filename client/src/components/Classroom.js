@@ -18,7 +18,6 @@ function CreateAssignment({ props }) {
     title: "",
     statement: "",
     deadline: new Date(),
-    attachment: null,
   });
 
   const [show, setShow] = useState(false);
@@ -51,20 +50,12 @@ function CreateAssignment({ props }) {
     }));
   };
 
-  const onChangeAttachment = (e) => {
-    setValues((values) => ({
-      ...values,
-      attachment: e.target.files[0],
-    }));
-  };
-
   const handleCreate = () => {
     setShow(false);
     if (
       values.title === "" ||
       values.statement === "" ||
-      values.deadline === "" ||
-      values.attachment === null
+      values.deadline === ""
     ) {
       setSubmitted(true);
       props.dispatch(receiveError("Fill up all the required fields !"));
@@ -74,10 +65,6 @@ function CreateAssignment({ props }) {
     reqObj.token = props.token;
     reqObj.classroom_id = props.classroom_id;
     setSubmitted(true);
-    setValues((values) => ({
-      ...values,
-      attachment: null,
-    }));
     setAssignmentlength(props.assignments.length);
     props.dispatch(createAssignment(reqObj));
   };
@@ -109,9 +96,11 @@ function CreateAssignment({ props }) {
           <h1>Classroom: {props.name}</h1>
         </Col>
         <Col md={4}>
-          <Button variant="primary" onClick={handleShow}>
-            + Create Assignment
-          </Button>
+          {props.isTeacher === true && (
+            <Button variant="primary" onClick={handleShow}>
+              + Create Assignment
+            </Button>
+          )}
         </Col>
       </Row>
       <p style={{ color: "red" }}>
@@ -124,7 +113,6 @@ function CreateAssignment({ props }) {
           <Modal.Title>Create new assignment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/*Form to upload the assignment details*/}
           <form>
             <div className="d-grid gap-2 col-8 mx-auto my-3">
               <label>
@@ -162,17 +150,6 @@ function CreateAssignment({ props }) {
                 onChange={handleDateChange}
               />
             </div>
-            <div className="d-grid gap-2 col-8 mx-auto my-5">
-              <label>
-                Attachment
-                <sup style={{ color: "red" }}>* ( 1 file atmost )</sup>
-              </label>
-              <input
-                type="file"
-                className="form-control"
-                onChange={onChangeAttachment}
-              />
-            </div>
           </form>
         </Modal.Body>
         <Modal.Footer>
@@ -198,7 +175,7 @@ function AssignmentIcon(props) {
       >
         <Card.Img
           variant="top"
-          src="https://static.voices.com/wp-content/uploads/2019/06/MR-3025-online-learning-vs-traditional.jpg"
+          src="../assignment.jpg"
           alt="Icon"
         />
         <Card.Body>
@@ -232,6 +209,37 @@ function AssignmentIcon(props) {
   );
 }
 
+function TableRow(props) {
+  return (
+    <tr>
+      <td>{props.id}</td>
+      <td>{props.email}</td>
+    </tr>
+  );
+}
+
+function Participants({ props }) {
+  const renderRow = () => {
+    return props.students.map((item, i) => {
+      return <TableRow key={i} id={i + 1} email={item} />;
+    });
+  };
+  return (
+    <div className="my-3">
+      <h5>Participants List</h5>
+      <table className="table table-light table-striped my-3">
+        <thead>
+          <tr>
+            <td>Sl No.</td>
+            <td>Email ID</td>
+          </tr>
+        </thead>
+        <tbody>{renderRow()}</tbody>
+      </table>
+    </div>
+  );
+}
+
 function Classroom(props) {
   const renderAssignment = () => {
     if (props.assignments === undefined || props.assignments === null) return;
@@ -245,7 +253,7 @@ function Classroom(props) {
             cid={props.id}
             aid={props.assignments.length - 1 - i}
             title={item.title}
-            deadline={item.deadline}
+            deadline={item.deadline.slice(0, 10)}
             createdAt={item.createdAt}
             isTeacher={props.isTeacher}
           />
@@ -272,6 +280,9 @@ function Classroom(props) {
           {renderAssignment()}
         </Row>
       )}
+      <Row xl={3}>
+        <Participants props={props} />
+      </Row>
     </Container>
   );
 }

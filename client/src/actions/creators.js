@@ -46,17 +46,39 @@ export const createAssignment = (details) => {
     try {
       dispatch(resetError());
       let url = "/api/assignment/create";
-      const formData = new FormData();
-      formData.append("title", details.title);
-      formData.append("statement", details.statement);
-      formData.append("deadline", details.deadline);
-      formData.append("classroom_id", details.classroom_id);
-      formData.append("attachment", details.attachment);
+      const reqObj = {
+        title: details.title,
+        statement: details.statement,
+        deadline: details.deadline,
+        classroom_id: details.classroom_id,
+      };
 
-      const response = await axios.post(url, formData, {
+      const response = await axios.post(url, reqObj, {
         headers: {
           Authorization: "Bearer " + details.token,
-          ContentType: "multipart/form-data",
+        },
+      });
+      return dispatch(updateClassroom(response.data.classrooms));
+    } catch (err) {
+      return dispatch(receiveError(err.response.data.msg));
+    }
+  };
+};
+
+export const submitAssignment = (details) => {
+  return async (dispatch) => {
+    try {
+      dispatch(resetError());
+      let url = "/api/assignment/submit";
+      const reqObj = {
+        answer: details.answer,
+        email: details.email,
+        assignment_id: details.assignment_id,
+      };
+
+      const response = await axios.post(url, reqObj, {
+        headers: {
+          Authorization: "Bearer " + details.token,
         },
       });
       return dispatch(updateClassroom(response.data.classrooms));

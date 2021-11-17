@@ -76,6 +76,8 @@ route.post("/create", authHandler, async (req, res) => {
 route.post("/join", authHandler, async (req, res) => {
   try {
     if (!req.user) return;
+
+    // if req.user is a teacher
     if (req.user.isTeacher === true) {
       res.status(403).json({ msg: "Only students can join classrooms" });
       return;
@@ -83,19 +85,29 @@ route.post("/join", authHandler, async (req, res) => {
 
     const { passcode } = req.body;
     let classroom = await classroomSchema.findOne({ passcode });
+
+    // if the classroom does not exist in the database
     if (!classroom) return res.status(400).json({ msg: "Invalid Passcode" });
 
     const classroomExists = await req.user.classrooms.find((classroom_id) =>
       isEqual(classroom_id, classroom._id)
     );
 
+    // if the classroom exists in the student's classrooms array
     if (classroomExists) {
       res.status(400).json({ msg: "Classroom already joined" });
       return;
     }
 
+    // add the student's email to the classroom's students array
+    classroom.students.push(req.user.email);
+    classroom = await classroomSchema.findOneAndUpdate({ passcode }, classroom);
+
+    // add the classroom id to the student's classrooms array
     req.user.classrooms.push(classroom._id);
     let newuser = await req.user.save();
+
+    // return the response
     populated_newuser = await newuser.populate("classrooms");
 
     res.json({
