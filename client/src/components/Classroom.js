@@ -8,7 +8,7 @@ import { registerLocale } from "react-datepicker";
 import { Helmet } from "react-helmet";
 import enIN from "date-fns/locale/en-IN";
 import "react-datepicker/dist/react-datepicker.css";
-import { createAssignment, fetchData } from "../actions/creators";
+import { createAssignment } from "../actions/creators";
 import { receiveError } from "../actions/actionUtils";
 
 registerLocale("enIN", enIN);
@@ -26,10 +26,6 @@ function CreateAssignment({ props }) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const handleFetch = (e) => {
-    props.dispatch(fetchData(props.token));
-  };
 
   const onChangeTitle = (e) => {
     e.persist();
@@ -107,20 +103,11 @@ function CreateAssignment({ props }) {
           )}
         </Col>
       </Row>
-      <Row>
-        <Col md={8}>
-          <p style={{ color: "red" }}>
-            {props.isTeacher
-              ? "* The assignments you create will appear here"
-              : `Created by: ${props.creator}`}
-          </p>
-        </Col>
-        <Col md={4}>
-          <Button variant="success" onClick={handleFetch}>
-            Fetch all assignments
-          </Button>
-        </Col>
-      </Row>
+      <p style={{ color: "red" }}>
+        {props.isTeacher
+          ? "* The assignments you create will appear here"
+          : `Created by: ${props.creator}`}
+      </p>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Create new assignment</Modal.Title>

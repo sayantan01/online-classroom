@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Container, Row, Col, Button, Alert } from "react-bootstrap";
-import { submitAssignment, fetchData } from "../actions/creators";
+import { submitAssignment } from "../actions/creators";
 
 function TableRow(props) {
   const downloadSubmission = () => {
@@ -41,22 +41,9 @@ function Submissions({ props }) {
     });
   };
 
-  const handleFetch = (e) => {
-    props.dispatch(fetchData(props.token));
-  };
-
   return (
     <div>
-      <Row>
-        <Col md={6}>
-          <h5>Submissions</h5>
-        </Col>
-        <Col md={6}>
-          <Button variant="success" onClick={handleFetch}>
-            Fetch all submissions
-          </Button>
-        </Col>
-      </Row>
+      <h5>Submissions</h5>
       <table className="table table-light table-striped my-3">
         <thead>
           <tr>

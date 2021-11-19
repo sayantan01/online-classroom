@@ -11,7 +11,7 @@ function Logout(props) {
   return (
     <div>
       <form method="POST" onSubmit={handleSubmit}>
-        <button type="submit" className="btn btn-success mx-md-2">
+        <button type="submit" className="btn btn-success mx-lg-2">
           Logout
         </button>
       </form>

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Tooltip from "@material-ui/core/Tooltip";
 import "bootstrap/dist/css/bootstrap.min.css";
 import jwt_decode from "jwt-decode";
 import { Container, Nav, Navbar } from "react-bootstrap";
@@ -12,6 +13,7 @@ import Dashboard from "./components/Dashboard";
 import User from "./components/User";
 import Classroom from "./components/Classroom";
 import Assignment from "./components/Assignment";
+import Update from "./components/Update";
 import NotFound from "./components/NotFound";
 import { logoutUser } from "./actions/actionUtils";
 
@@ -79,13 +81,13 @@ function App(props) {
         props.dispatch(logoutUser());
       }
     } catch (err) {
-      console.log("err " + err);
+      console.log("no token");
     }
   }, [props]);
 
   return (
     <div>
-      <Navbar bg="dark" variant="dark" expand="md">
+      <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
           <Navbar.Brand href="/home">M Classroom</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -93,13 +95,26 @@ function App(props) {
             <Nav className="mr-auto">
               <Nav.Link href="/signup">Signup</Nav.Link>
               <Nav.Link href="/login">Login</Nav.Link>
-              <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+              <Nav.Link href="/dashboard">Classrooms</Nav.Link>
               {props.token !== null && (
                 <Nav.Item>
                   <User />
                 </Nav.Item>
               )}
               {props.token !== null && <Logout />}
+              {props.token !== null && (
+                <Tooltip
+                  title={
+                    <p style={{ fontSize: 15 }}>
+                      fetch the latest data from server
+                    </p>
+                  }
+                >
+                  <div>
+                    <Update />
+                  </div>
+                </Tooltip>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

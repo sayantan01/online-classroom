@@ -99,7 +99,6 @@ export const fetchData = (token) => {
           Authorization: "Bearer " + token,
         },
       });
-      console.log(response.data.classrooms)
       return dispatch(updateClassroom(response.data.classrooms));
     } catch (err) {
       return dispatch(receiveError("Error in fetching data"));
