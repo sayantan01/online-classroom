@@ -36,6 +36,13 @@
  *            type: array
  *            example: []
  
+*     FetchClassroom_Output:
+ *       type: object
+ *       properties:
+ *         classrooms:
+ *            type: array
+ *            example: []
+ 
  *   securitySchemes:
  *       bearerAuth:            
  *         type: http
@@ -135,4 +142,23 @@
  *                  example: Only students can join classrooms
  *       500:
  *          description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/classroom/fetch:
+ *   get:
+ *     summary: Fetch the classrooms for a user.
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Classroom joining successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   $ref: '#/components/schemas/FetchClassroom_Output'
  */

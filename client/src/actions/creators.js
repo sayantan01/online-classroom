@@ -87,3 +87,21 @@ export const submitAssignment = (details) => {
     }
   };
 };
+
+export const fetchData = (token) => {
+  return async (dispatch) => {
+    try {
+      dispatch(resetError());
+      let url = "/api/classroom/fetch";
+
+      const response = await axios.get(url, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      return dispatch(updateClassroom(response.data.classrooms));
+    } catch (err) {
+      return dispatch(receiveError("Error in fetching data"));
+    }
+  };
+};

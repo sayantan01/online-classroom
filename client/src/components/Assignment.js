@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import Disqus from "disqus-react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Container, Row, Col, Button, Alert } from "react-bootstrap";
-import { submitAssignment } from "../actions/creators";
+import { submitAssignment, fetchData } from "../actions/creators";
 
 function TableRow(props) {
   const downloadSubmission = () => {
@@ -42,11 +41,22 @@ function Submissions({ props }) {
     });
   };
 
+  const handleFetch = (e) => {
+    props.dispatch(fetchData(props.token));
+  };
+
   return (
     <div>
-      <div>
-        <h5>Submissions</h5>
-      </div>
+      <Row>
+        <Col md={6}>
+          <h5>Submissions</h5>
+        </Col>
+        <Col md={6}>
+          <Button variant="success" onClick={handleFetch}>
+            Fetch all submissions
+          </Button>
+        </Col>
+      </Row>
       <table className="table table-light table-striped my-3">
         <thead>
           <tr>
@@ -62,13 +72,6 @@ function Submissions({ props }) {
 }
 
 function Assignment(props) {
-  const disqusShortname = "https-online-classroom-2021-herokuapp-com";
-  const disqusConfig = {
-    url: "https://online-classroom-2021.herokuapp.com/",
-    identifier: "assignment-id",
-    title: "assignment",
-  };
-
   const exists = props.records.find((r) => r.student === props.email);
 
   const [answer, setAnswer] = useState("");
@@ -154,13 +157,6 @@ function Assignment(props) {
       )}
 
       {props.isTeacher === true && <Submissions props={props} />}
-
-      <div className="my-5">
-        <Disqus.DiscussionEmbed
-          shortname={disqusShortname}
-          config={disqusConfig}
-        />
-      </div>
     </Container>
   );
 }

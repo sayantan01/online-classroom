@@ -120,4 +120,13 @@ route.post("/join", authHandler, async (req, res) => {
   }
 });
 
+// return the list of classrooms for a user
+route.get("/fetch", authHandler, async (req, res) => {
+  if (!req.user) return;
+  populated_user = await req.user.populate("classrooms");
+  res.json({
+    classrooms: populated_user.classrooms,
+  });
+});
+
 module.exports = route;

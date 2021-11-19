@@ -135,7 +135,8 @@ function ClassIcon(props) {
             <br />
             {props.isTeacher === true && (
               <label>
-                Passcode: <p style={{ fontSize: 12 }}>{props.passcode}</p>
+                Passcode:{" "}
+                <label style={{ fontSize: 12 }}>{props.passcode}</label>
               </label>
             )}
           </Card.Text>
