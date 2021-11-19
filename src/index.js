@@ -43,7 +43,8 @@ mongoose.connection.once("open", () =>
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname + "../../client/build")));
 
-  app.get("*", (req, res) => {
+  app.get("*", (req, res, next) => {
+    if (/^\/api.*$/.test(req.url)) return next();
     res.sendFile(path.join(__dirname + "../../client/build/index.html"));
   });
 } else {
@@ -55,7 +56,7 @@ if (process.env.NODE_ENV === "production") {
 app.use("/api/user", userRoutes);
 app.use("/api/classroom", classRoutes);
 app.use("/api/assignment", assignmentRoutes);
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // setup the server
 const PORT = process.env.PORT || 4000;
