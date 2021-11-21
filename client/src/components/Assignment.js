@@ -118,30 +118,35 @@ function Assignment(props) {
           <hr />
         </Col>
       </Row>
-      {props.isTeacher === false && (exists || props.curDate <= props.deadline) && (
-        <div>
-          <Row className="my-5">
-            <label className="mb-3">Your submission :</label>
-            <Col md={10}>
-              <textarea
-                placeholder="Write your answer here"
-                className="col-sm-12"
-                rows="10"
-                value={!exists ? answer : exists.submission}
-                disabled={!exists ? false : true}
-                onChange={onChangeAnswer}
-              />
-            </Col>
-          </Row>
-          {!exists && (
+      {props.isTeacher === false &&
+        (exists || props.curDate <= props.deadline) && (
+          <div>
             <Row className="my-5">
-              <Button onClick={handleSubmit} variant="success" disabled = { (answer === "") ? true : false }>
-                Submit answer
-              </Button>
+              <label className="mb-3">Your submission :</label>
+              <Col md={10}>
+                <textarea
+                  placeholder="Write your answer here"
+                  className="col-sm-12"
+                  rows="10"
+                  value={!exists ? answer : exists.submission}
+                  disabled={!exists ? false : true}
+                  onChange={onChangeAnswer}
+                />
+              </Col>
             </Row>
-          )}
-        </div>
-      )}
+            {!exists && (
+              <Row className="my-5">
+                <Button
+                  onClick={handleSubmit}
+                  variant="success"
+                  disabled={answer === "" ? true : false}
+                >
+                  Submit answer
+                </Button>
+              </Row>
+            )}
+          </div>
+        )}
 
       {props.isTeacher === true && <Submissions props={props} />}
     </Container>

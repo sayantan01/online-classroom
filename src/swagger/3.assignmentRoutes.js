@@ -132,7 +132,7 @@
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/SubmitAssignment_Output'           
+ *               $ref: '#/components/schemas/SubmitAssignment_Output'
  *       400:
  *         description: Bad request
  *         content:

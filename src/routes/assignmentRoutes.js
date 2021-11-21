@@ -79,7 +79,6 @@ route.post("/create", authHandler, async (req, res) => {
   }
 });
 
-
 // submit an assignment - used by students
 route.post("/submit", authHandler, async (req, res) => {
   try {
@@ -119,7 +118,10 @@ route.post("/submit", authHandler, async (req, res) => {
     }
 
     // check whether the deadline of the assignment is over or not
-    if(assignment.deadline.slice(0, 10) < new Date(Date.now()).toISOString().slice(0, 10)) {
+    if (
+      assignment.deadline.slice(0, 10) <
+      new Date(Date.now()).toISOString().slice(0, 10)
+    ) {
       res.status(403).json({ msg: "Deadline over for the submission" });
       return;
     }

@@ -146,7 +146,17 @@ function CreateAssignment({ props }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleCreate} disabled = {(values.title === "" || values.statement === "" || values.deadline === "") ? true : false}>
+          <Button
+            variant="primary"
+            onClick={handleCreate}
+            disabled={
+              values.title === "" ||
+              values.statement === "" ||
+              values.deadline === ""
+                ? true
+                : false
+            }
+          >
             Upload
           </Button>
         </Modal.Footer>
