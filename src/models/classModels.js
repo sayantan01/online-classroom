@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// schema to hold the submission of a student for a particular assignment
+// schema to hold the submission details of a student for a particular assignment
 const recordSchema = Schema({
   student: {
     type: String,

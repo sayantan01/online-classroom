@@ -7,7 +7,7 @@
  *       properties:
  *         name:
  *           type: string
- *           example: abc
+ *           example: sample_classroom
  
  *     CreateClassroom_Output:
  *       type: object
@@ -24,7 +24,7 @@
  *       properties:
  *         passcode:
  *           type: string
- *           example: ''
+ *           example: sample_passcode
  
  *     JoinClassroom_Output:
  *       type: object
@@ -69,10 +69,7 @@
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 data:
- *                   $ref: '#/components/schemas/CreateClassroom_Output'
+ *               $ref: '#/components/schemas/CreateClassroom_Output'
  *       400:
  *         description: Bad request
  *         content:
@@ -83,6 +80,16 @@
  *                 msg:
  *                  type: String
  *                  example: Another classroom with same name already exists
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                  type: String
+ *                  example: User unauthorized
  *       403:
  *         description: Forbidden
  *         content:
@@ -116,10 +123,7 @@
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 data:
- *                   $ref: '#/components/schemas/JoinClassroom_Output'
+ *               $ref: '#/components/schemas/JoinClassroom_Output'
  *       400:
  *         description: Bad request
  *         content:
@@ -130,6 +134,16 @@
  *                 msg:
  *                  type: String
  *                  example: Classroom already joined
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                  type: String
+ *                  example: User unauthorized
  *       403:
  *         description: Forbidden
  *         content:
@@ -153,12 +167,15 @@
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Classroom joining successful
+ *         description: Successfully fetched classrooms
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 data:
- *                   $ref: '#/components/schemas/FetchClassroom_Output'
+ *                 classrooms:
+ *                  type: array
+ *                  example: []
+ *       500:
+ *          description: Internal server error
  */

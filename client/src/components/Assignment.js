@@ -118,7 +118,7 @@ function Assignment(props) {
           <hr />
         </Col>
       </Row>
-      {props.isTeacher === false && props.curDate <= props.deadline && (
+      {props.isTeacher === false && (exists || props.curDate <= props.deadline) && (
         <div>
           <Row className="my-5">
             <label className="mb-3">Your submission :</label>
@@ -135,7 +135,7 @@ function Assignment(props) {
           </Row>
           {!exists && (
             <Row className="my-5">
-              <Button onClick={handleSubmit} variant="success">
+              <Button onClick={handleSubmit} variant="success" disabled = { (answer === "") ? true : false }>
                 Submit answer
               </Button>
             </Row>

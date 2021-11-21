@@ -9,7 +9,6 @@ import { Helmet } from "react-helmet";
 import enIN from "date-fns/locale/en-IN";
 import "react-datepicker/dist/react-datepicker.css";
 import { createAssignment } from "../actions/creators";
-import { receiveError } from "../actions/actionUtils";
 
 registerLocale("enIN", enIN);
 
@@ -52,15 +51,6 @@ function CreateAssignment({ props }) {
 
   const handleCreate = () => {
     setShow(false);
-    if (
-      values.title === "" ||
-      values.statement === "" ||
-      values.deadline === ""
-    ) {
-      setSubmitted(true);
-      props.dispatch(receiveError("Fill up all the required fields !"));
-      return;
-    }
     let reqObj = values;
     reqObj.token = props.token;
     reqObj.classroom_id = props.classroom_id;
@@ -156,7 +146,7 @@ function CreateAssignment({ props }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleCreate}>
+          <Button variant="primary" onClick={handleCreate} disabled = {(values.title === "" || values.statement === "" || values.deadline === "") ? true : false}>
             Upload
           </Button>
         </Modal.Footer>

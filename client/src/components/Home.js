@@ -22,6 +22,13 @@ function Home() {
           <Carousel.Item>
             <img
               className="d-block w-100"
+              src="https://www.viewsonic.com/library/wp-content/uploads/2020/03/X00324-2-01_Facebook.jpg"
+              alt="Third slide"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
               src="https://www.designingdigitally.com/promotional/blog/quotes/4.png"
               alt="First slide"
             />
@@ -29,16 +36,8 @@ function Home() {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://1635225677.rsc.cdn77.org/images/animation-elearning-software.jpg"
+              src="https://www.schooljotter.com/wp-content/uploads/2016/01/shutterstock348916574.jpg"
               alt="Second slide"
-            />
-          </Carousel.Item>
-
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://cdn1.expresscomputer.in/wp-content/uploads/2019/08/12100736/e-learning.jpg"
-              alt="Third slide"
             />
           </Carousel.Item>
         </Carousel>

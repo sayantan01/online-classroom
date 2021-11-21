@@ -16,6 +16,7 @@
  *           example: 16/11/21
  *         classroom_id:
  *           type: string
+ *           example: 619a019971635b0f38d4ca67
  *                      
  
  *     CreateAssignment_Output:
@@ -38,7 +39,8 @@
  *           type: string
  *           example: student@mail
  *         assignment_id:
- *           type: string             
+ *           type: string      
+ *           example: 619a331735396668dfcb5646       
  
  *     SubmitAssignment_Output:
  *       type: object
@@ -76,10 +78,7 @@
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 data:
- *                   $ref: '#/components/schemas/CreateAssignment_Output'
+ *               $ref: '#/components/schemas/CreateAssignment_Output'
  *       400:
  *         description: Bad request
  *         content:
@@ -90,6 +89,16 @@
  *                 msg:
  *                  type: String
  *                  example: Invalid classroom id
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                  type: String
+ *                  example: User unauthorized
  *       403:
  *         description: Forbidden
  *         content:
@@ -123,10 +132,7 @@
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 data:
- *                   $ref: '#/components/schemas/SubmitAssignment_Output'
+ *               $ref: '#/components/schemas/SubmitAssignment_Output'           
  *       400:
  *         description: Bad request
  *         content:
@@ -137,6 +143,16 @@
  *                 msg:
  *                  type: String
  *                  example: Invalid assignment id
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                  type: String
+ *                  example: User unauthorized
  *       403:
  *         description: Forbidden
  *         content:

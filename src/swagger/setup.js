@@ -11,9 +11,13 @@ const swaggerDefinition = {
   },
   servers: [
     {
+      url: "https://online-classroom-2021.herokuapp.com",
+      description: "Production server",
+    },
+    {
       url: "http://localhost:4000",
       description: "Development server",
-    },
+    }
   ],
 };
 

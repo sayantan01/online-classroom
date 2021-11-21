@@ -116,10 +116,17 @@
  *         content:
  *           application/json:
  *             schema:
+ *               $ref: '#/components/schemas/NewUserLogin_Output'
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
  *               type: object
  *               properties:
- *                 data:
- *                   $ref: '#/components/schemas/NewUserLogin_Output'
+ *                 msg:
+ *                  type: String
+ *                  example: email is required
  *       403:
  *         description: Forbidden
  *         content:
