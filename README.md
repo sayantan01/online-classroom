@@ -48,3 +48,18 @@ npm i && npm start
   - Open an assignment
   - See the assignment details
   - Make a submission against an assignment
+  
+  
+## Technologies Used :
+
+<img alt="React" align="left" width="50px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png" />
+
+<img alt="React" align="left" width="50px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nodejs/nodejs.png" /> 
+
+<img alt="React" align="left" width="50px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/express/express.png" /> 
+
+<img alt="React" align="left" width="50px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mongodb/mongodb.png" />
+
+<img alt="React" align="left" width="100px" height="50px" src="https://www.devonblog.com/wp-content/uploads/2018/08/jwt_05.jpg" />
+
+<img alt="React" align="left" width="100px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFBvyZwtWapclJnU5s993F63khm4I_vEbE0U9LVpydYK5ZBxe_vqq6pHfOWaQjN9oWu6E&usqp=CAU" /> 
