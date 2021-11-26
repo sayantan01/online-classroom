@@ -22,21 +22,21 @@ function Home() {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://www.viewsonic.com/library/wp-content/uploads/2020/03/X00324-2-01_Facebook.jpg"
+              src="./homepage1.jpg"
               alt="Third slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://www.designingdigitally.com/promotional/blog/quotes/4.png"
+              src="./homepage2.png"
               alt="First slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://www.schooljotter.com/wp-content/uploads/2016/01/shutterstock348916574.jpg"
+              src="./homepage3.jpg"
               alt="Second slide"
             />
           </Carousel.Item>

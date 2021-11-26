@@ -28,7 +28,10 @@ const assignmentSchema = new Schema({
 
   createdAt: {
     type: String,
-    default: new Date(Date.now()).toUTCString().slice(0, 16),
+    // Date converted to IST
+    default: new Date(Date.now() + 5.5 * 60 * 60 * 1000)
+      .toUTCString()
+      .slice(0, 16),
   },
 
   deadline: {

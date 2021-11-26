@@ -7,8 +7,7 @@
     "start": "node src/index",
     "dev": "nodemon src/index",
     "cdev": "concurrently --kill-others-on-fail \"npm start\" \"cd client && npm start\"",
-    "style_server": "npx prettier --write .",
-    "style_client": "npx prettier --write client/src/",
+    "style_code": "npx prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },

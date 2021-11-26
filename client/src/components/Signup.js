@@ -150,7 +150,7 @@ function Signup(props) {
               value="teacher"
               onChange={onChangeUsertype}
             />
-            <label className="form-check-label">Teacher</label>
+            <label className="form-check-label">Faculty</label>
           </div>
           <div className="form-check">
             <input
