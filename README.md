@@ -60,6 +60,15 @@ npm i && npm start
 
 <img alt="React" align="left" width="50px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mongodb/mongodb.png" />
 
+<img alt="React" align="left" width="100px" height="50px" src="https://www.knowi.com/images/landing-new/mongodb/Blog-1-_-Title-Image.jpg" />
+
 <img alt="React" align="left" width="100px" height="50px" src="https://www.devonblog.com/wp-content/uploads/2018/08/jwt_05.jpg" />
 
-<img alt="React" align="left" width="100px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFBvyZwtWapclJnU5s993F63khm4I_vEbE0U9LVpydYK5ZBxe_vqq6pHfOWaQjN9oWu6E&usqp=CAU" /> 
+<img alt="React" align="left" width="100px" height = "50px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFBvyZwtWapclJnU5s993F63khm4I_vEbE0U9LVpydYK5ZBxe_vqq6pHfOWaQjN9oWu6E&usqp=CAU" /> 
+
+- Frontend: ReactJS
+- Backend: Node.js - Express
+- Database: MongoDB
+- DBaaS: MongoDB Atlas
+- Authentication & Authorization: JWT
+- PaaS: Heroku
