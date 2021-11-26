@@ -3,15 +3,18 @@
 ![](https://github.com/sayantan01/online-classroom/workflows/Deploy/badge.svg)
 
 ## A website to help students and teachers collaborate virtually
+<br />  
 
 ![pic2](https://user-images.githubusercontent.com/57137595/142589466-2d40dc08-d445-4b1f-b595-6dd21e85c880.png)
 
+<br />  
 
 ## Important Links :
 
 - Access the web app at: https://online-classroom-2021.herokuapp.com/
 - Find the api docs at: https://online-classroom-2021.herokuapp.com/api/docs
 
+<br />  
 
 ## Running the web app on localhost :
 
@@ -21,6 +24,7 @@ Clone the repo and then from the cloned directory, run the following command:
 npm i && npm start
 ```
 
+<br />  
 
 ## App features :
 
@@ -49,7 +53,8 @@ npm i && npm start
   - See the assignment details
   - Make a submission against an assignment
   
-  
+<br />  
+
 ## Technologies Used :
 
 <img alt="React" align="left" width="50px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png" />
@@ -60,15 +65,19 @@ npm i && npm start
 
 <img alt="React" align="left" width="50px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mongodb/mongodb.png" />
 
+<img alt="React" align="left" width="50px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mongoose/mongoose.png" />
+
 <img alt="React" align="left" width="100px" height="50px" src="https://www.knowi.com/images/landing-new/mongodb/Blog-1-_-Title-Image.jpg" />
 
 <img alt="React" align="left" width="100px" height="50px" src="https://www.devonblog.com/wp-content/uploads/2018/08/jwt_05.jpg" />
 
 <img alt="React" align="left" width="100px" height = "50px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFBvyZwtWapclJnU5s993F63khm4I_vEbE0U9LVpydYK5ZBxe_vqq6pHfOWaQjN9oWu6E&usqp=CAU" /> 
 
-- Frontend: ReactJS
-- Backend: Node.js - Express
-- Database: MongoDB
-- DBaaS: MongoDB Atlas
-- Authentication & Authorization: JWT
-- PaaS: Heroku
+<br /><br /><br />
+- Frontend: ***ReactJS***
+- Backend: ***Node.js - Express***
+- Database: ***MongoDB***
+- ODM: ***Mongoose***
+- DBaaS: ***MongoDB Atlas***
+- Authentication & Authorization: ***JWT***
+- PaaS: ***Heroku***
