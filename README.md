@@ -13,6 +13,7 @@
 
 - Access the web app at: https://online-classroom-2021.herokuapp.com/
 - Find the api docs at: https://online-classroom-2021.herokuapp.com/api/docs
+- Video demo: https://youtu.be/nlo8p5jUt40
 
 <br />  
 
